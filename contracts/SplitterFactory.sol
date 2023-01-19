@@ -11,6 +11,8 @@ contract SplitterFactory {
     address public _daoSignerAddress;
     address public _owner;
 
+		event SplitCreated(address msg.sender, address recipient);
+
     // constructor() {
     //     _daoTreasuryAddress = 0xef107eEf75a2efaa93a21500524A79904A0a5Cf7;
     //     _daoSignerAddress = 0x5FbDB2315678afecb367f032d93F642f64180aa3;
@@ -34,6 +36,7 @@ contract SplitterFactory {
         deployedSplittersbyRecipient[recipient] = newSplit;
         splittersAddressesByRecipient[recipient] = address(newSplit);
         _daoMembers[recipient] = true;
+				emit SplitCreated(msg.sender, recipient);
     }
 
     function removeDAOMember(address member) public {
